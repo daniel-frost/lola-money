@@ -3,8 +3,6 @@ import { Card } from "@/components/ui/card";
 import { StatusPill } from "@/components/ui/status-pill";
 import { ValueRow } from "@/components/ui/value-row";
 
-// Temporary token smoke-test — confirms the Lola design tokens load.
-// Replace with the real first screen.
 const hues = [
   { name: "Blue · action", wash: "bg-blue-wash", bold: "bg-blue-bold" },
   { name: "Yellow · focus", wash: "bg-yellow-wash", bold: "bg-yellow-bold" },
@@ -13,9 +11,9 @@ const hues = [
   { name: "Purple · Lola", wash: "bg-purple-wash", bold: "bg-purple-bold" },
 ];
 
-export default function Home() {
+export default function Overview() {
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-8 p-8">
+    <div className="flex max-w-xl flex-col gap-8">
       <h1 className="font-display text-[32px] font-black leading-tight tracking-display text-ink">
         Design tokens are{" "}
         <span className="bg-yellow-wash px-1 text-yellow-bold">live</span>.
@@ -81,8 +79,8 @@ export default function Home() {
       </Card>
 
       <p className="text-sm text-muted">
-        Temporary token preview — replace with the real first screen.
+        Temporary token preview — replace with the real Overview dashboard.
       </p>
-    </main>
+    </div>
   );
 }
