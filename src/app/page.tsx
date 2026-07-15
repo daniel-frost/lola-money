@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { StatusPill } from "@/components/ui/status-pill";
+import { ValueRow } from "@/components/ui/value-row";
 
 // Temporary token smoke-test — confirms the Lola design tokens load.
 // Replace with the real first screen.
@@ -44,6 +45,39 @@ export default function Home() {
         <Button variant="ink">✦ Apply plan</Button>
         <Button size="sm">Add debt</Button>
         <Button disabled>Disabled</Button>
+      </Card>
+
+      <Card className="flex flex-col py-0">
+        <ValueRow
+          value="$2,750"
+          name="Store card"
+          detail={
+            <span className="inline-flex items-center gap-2">
+              28.9% APR · paid off December 2026
+              <StatusPill variant="focus" />
+            </span>
+          }
+          trailing={<span className="text-faint">›</span>}
+        />
+        <ValueRow
+          divider
+          value="$6,414"
+          name="Personal loan"
+          detail="11.2% APR · paid off August 2027"
+          trailing={<span className="text-faint">›</span>}
+        />
+        <ValueRow
+          divider
+          value="$980"
+          name="Visa •• 4412"
+          detail={
+            <span className="inline-flex items-center gap-2">
+              24.9% APR · overdue since July 10
+              <StatusPill variant="overdue" />
+            </span>
+          }
+          trailing={<span className="text-faint">›</span>}
+        />
       </Card>
 
       <p className="text-sm text-muted">
