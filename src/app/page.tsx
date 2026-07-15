@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { StatusPill } from "@/components/ui/status-pill";
 
@@ -35,6 +36,14 @@ export default function Home() {
         <StatusPill variant="overdue" />
         <StatusPill variant="simulated" />
         <StatusPill variant="now" />
+      </Card>
+
+      <Card className="flex flex-wrap items-center gap-3">
+        <Button>Mark paid</Button>
+        <Button variant="ghost">Dismiss</Button>
+        <Button variant="ink">✦ Apply plan</Button>
+        <Button size="sm">Add debt</Button>
+        <Button disabled>Disabled</Button>
       </Card>
 
       <p className="text-sm text-muted">
