@@ -27,7 +27,8 @@ below is downstream of this.
 - **Detail lines are quiet, dot-separated fragments:** "11.2% APR · paid off August 2027",
   "Friday, July 18 · min $85".
 - **Warm, direct, second person.** "Welcome back, Maya!" Titles may address the user by name.
-- **Status words shout only inside pills:** FOCUS, PAID OFF ✓, ✦ SIMULATED, OVERDUE, NOW.
+- **Status words appear only inside pills**, set **lowercase**: focus · paid off ✓ ·
+  ✦ simulated · overdue · now. The wash color earns the attention, not capitals.
 - **`✓` and `✦` are the only glyph decorations. No emoji.**
 - **Coral copy is factual, never scolding** — "Overdue since July 10," not "You missed this."
 

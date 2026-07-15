@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { StatusPill } from "@/components/ui/status-pill";
 
 // Temporary token smoke-test — confirms the Lola design tokens load.
 // Replace with the real first screen.
@@ -26,6 +27,14 @@ export default function Home() {
             <span className="text-ink">{h.name}</span>
           </div>
         ))}
+      </Card>
+
+      <Card className="flex flex-wrap items-center gap-2">
+        <StatusPill variant="focus" />
+        <StatusPill variant="paid" />
+        <StatusPill variant="overdue" />
+        <StatusPill variant="simulated" />
+        <StatusPill variant="now" />
       </Card>
 
       <p className="text-sm text-muted">
