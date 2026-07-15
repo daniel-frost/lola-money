@@ -15,7 +15,7 @@ export function NavBar() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-hairline bg-card">
+    <header className="border-b border-hairline-strong bg-card">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
         <div className="flex h-full items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
