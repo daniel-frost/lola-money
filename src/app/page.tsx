@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/Card";
+import { Card } from "@/components/ui/card";
 
 // Temporary token smoke-test — confirms the Lola design tokens load.
 // Replace with the real first screen.
