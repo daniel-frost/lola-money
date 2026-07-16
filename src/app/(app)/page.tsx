@@ -1,5 +1,6 @@
 import { DebtFreeCard } from "@/components/overview/debt-free-card";
 import { DebtsCard } from "@/components/overview/debts-card";
+import { MonthlyPaymentsCard } from "@/components/overview/monthly-payments-card";
 import { OverviewHeader } from "@/components/overview/overview-header";
 import { PaymentsCard } from "@/components/overview/payments-card";
 import { Card } from "@/components/ui/card";
@@ -8,18 +9,21 @@ import {
   getOverviewDebtFree,
   getOverviewDebts,
   getOverviewHeaderStats,
+  getOverviewMonthlyPayments,
   getOverviewPayments,
 } from "@/server/overview/overview.service";
 import { getCurrentUser } from "@/server/user/user.service";
 
 export default async function Overview() {
-  const [user, summary, debtFree, debts, payments] = await Promise.all([
-    getCurrentUser(),
-    getOverviewHeaderStats(),
-    getOverviewDebtFree(),
-    getOverviewDebts(),
-    getOverviewPayments(),
-  ]);
+  const [user, summary, debtFree, debts, payments, monthlyPayments] =
+    await Promise.all([
+      getCurrentUser(),
+      getOverviewHeaderStats(),
+      getOverviewDebtFree(),
+      getOverviewDebts(),
+      getOverviewPayments(),
+      getOverviewMonthlyPayments(),
+    ]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -33,9 +37,7 @@ export default async function Overview() {
 
         <div className="flex flex-col gap-6">
           <DebtFreeCard debtFree={debtFree} />
-          <Card className="min-h-48">
-            <CardHeader title="Monthly payments" />
-          </Card>
+          <MonthlyPaymentsCard monthly={monthlyPayments} />
           <Card className="min-h-48">
             <CardHeader title="Progress" />
           </Card>

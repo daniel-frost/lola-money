@@ -1,12 +1,15 @@
 import type { OverviewDebtFree } from "@/domain/overview/debt-free";
 import type { OverviewDebtRow } from "@/domain/overview/debt-row";
 import type { OverviewHeaderStats } from "@/domain/overview/header-stats";
+import type { OverviewMonthlyPayments } from "@/domain/overview/monthly-payments";
 import type { OverviewPayments } from "@/domain/overview/payments";
 import type { PaymentRow } from "@/domain/payment/monthly-payments";
 import { summarizePayments } from "@/domain/payment/monthly-payments";
+import { summarizeMonthlyHistory } from "@/domain/payment/monthly-history";
 import { paidOffRatio, totalRemaining } from "@/domain/debt/progress";
 import { projectPayoff } from "@/domain/payoff/simulate";
 import { listDebts } from "@/server/debt/debt.service";
+import { getPayments } from "@/server/payment/payment.service";
 import { getPlan } from "@/server/plan/plan.service";
 
 export async function getOverviewHeaderStats(): Promise<OverviewHeaderStats> {
@@ -24,6 +27,17 @@ export async function getOverviewDebtFree(): Promise<OverviewDebtFree> {
   return {
     debtFreeOn: projection.debtFreeOn,
     months: projection.months,
+  };
+}
+
+export async function getOverviewMonthlyPayments(): Promise<OverviewMonthlyPayments> {
+  const [payments, debts, plan] = await Promise.all([
+    getPayments(),
+    listDebts(),
+    getPlan(),
+  ]);
+  return {
+    months: summarizeMonthlyHistory(payments, debts, plan.monthlyExtra),
   };
 }
 
