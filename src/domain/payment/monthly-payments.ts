@@ -25,3 +25,9 @@ export function summarizePayments(rows: PaymentRow[]): PaymentsSummary {
     totalCount: rows.length,
   };
 }
+
+/** Share of this month's planned dollars already paid, clamped to 0–1. */
+export function paymentProgress(summary: PaymentsSummary): number {
+  if (summary.planned <= 0) return 0;
+  return Math.max(0, Math.min(1, summary.paid / summary.planned));
+}
