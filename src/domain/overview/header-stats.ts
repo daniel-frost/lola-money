@@ -1,7 +1,7 @@
 import type { Strategy } from "@/domain/payoff/strategy";
 
 export type OverviewHeaderStats = {
-  remainingCents: number;
+  remaining: number;
   debtFreeOn: Date;
   paidOffRatio: number;
   strategy: Strategy;

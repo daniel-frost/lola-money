@@ -26,7 +26,7 @@ export function OverviewHeader({
       </h1>
 
       <dl className="flex items-start gap-8">
-        <Stat label="Remaining" value={formatUSD(summary.remainingCents)} />
+        <Stat label="Remaining" value={formatUSD(summary.remaining)} />
         <Stat
           label="Debt-free"
           value={<Highlight>{formatMonthYear(summary.debtFreeOn)}</Highlight>}

@@ -1,5 +1,6 @@
+import { cache } from "react";
 import type { User } from "@/domain/user/user";
 
-export async function getCurrentUser(): Promise<User> {
+export const getCurrentUser = cache(async (): Promise<User> => {
   return { name: "Maya" };
-}
+});
