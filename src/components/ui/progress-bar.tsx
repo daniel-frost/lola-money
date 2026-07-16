@@ -1,6 +1,5 @@
 import { cn } from "@/lib/cn";
 
-// Wash track + bold fill — the design system's hue-pair rule. Green = paid.
 const tones = {
   green: { track: "bg-green-wash", fill: "bg-green-bold" },
   blue: { track: "bg-blue-wash", fill: "bg-blue-bold" },
@@ -14,7 +13,6 @@ export function ProgressBar({
   className,
   ...props
 }: {
-  /** 0–1; values outside the range are clamped. */
   value: number;
   tone?: ProgressTone;
 } & Omit<React.ComponentProps<"div">, "children">) {
