@@ -1,7 +1,7 @@
 import { Highlight } from "@/components/ui/highlight";
 import type { OverviewHeaderStats } from "@/domain/overview/header-stats";
 import { STRATEGY_LABELS } from "@/domain/payoff/strategy";
-import { formatMonthYear, formatPercent, formatUSD } from "@/lib/format";
+import { formatPercent, formatUSD } from "@/lib/format";
 
 function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
@@ -27,16 +27,6 @@ export function OverviewHeader({
 
       <dl className="flex items-start gap-8">
         <Stat label="Remaining" value={formatUSD(summary.remaining)} />
-        <Stat
-          label="Debt-free"
-          value={
-            summary.debtFreeOn ? (
-              <Highlight>{formatMonthYear(summary.debtFreeOn)}</Highlight>
-            ) : (
-              "—"
-            )
-          }
-        />
         <Stat label="Paid off" value={formatPercent(summary.paidOffRatio)} />
         <Stat label="Plan" value={STRATEGY_LABELS[summary.strategy]} />
       </dl>

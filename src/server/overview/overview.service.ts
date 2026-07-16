@@ -1,3 +1,4 @@
+import type { OverviewDebtFree } from "@/domain/overview/debt-free";
 import type { OverviewDebtRow } from "@/domain/overview/debt-row";
 import type { OverviewHeaderStats } from "@/domain/overview/header-stats";
 import type { OverviewPayments } from "@/domain/overview/payments";
@@ -10,12 +11,19 @@ import { getPlan } from "@/server/plan/plan.service";
 
 export async function getOverviewHeaderStats(): Promise<OverviewHeaderStats> {
   const [debts, plan] = await Promise.all([listDebts(), getPlan()]);
-  const projection = projectPayoff(debts, plan);
   return {
     remaining: totalRemaining(debts),
-    debtFreeOn: projection.debtFreeOn,
     paidOffRatio: paidOffRatio(debts),
     strategy: plan.strategy,
+  };
+}
+
+export async function getOverviewDebtFree(): Promise<OverviewDebtFree> {
+  const [debts, plan] = await Promise.all([listDebts(), getPlan()]);
+  const projection = projectPayoff(debts, plan);
+  return {
+    debtFreeOn: projection.debtFreeOn,
+    months: projection.months,
   };
 }
 
