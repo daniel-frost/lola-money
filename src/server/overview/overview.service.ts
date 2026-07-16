@@ -3,28 +3,30 @@ import type { OverviewHeaderStats } from "@/domain/overview/header-stats";
 import type { OverviewPayments } from "@/domain/overview/payments";
 import type { PaymentRow } from "@/domain/payment/monthly-payments";
 import { summarizePayments } from "@/domain/payment/monthly-payments";
+import { paidOffRatio, totalRemaining } from "@/domain/debt/progress";
+import { projectPayoff } from "@/domain/payoff/simulate";
 import { listDebts } from "@/server/debt/debt.service";
+import { getPlan } from "@/server/plan/plan.service";
 
 export async function getOverviewHeaderStats(): Promise<OverviewHeaderStats> {
+  const [debts, plan] = await Promise.all([listDebts(), getPlan()]);
+  const projection = projectPayoff(debts, plan);
   return {
-    remaining: 4_231_800,
-    debtFreeOn: new Date("2029-08-01"),
-    paidOffRatio: 0.34,
-    strategy: "snowball",
+    remaining: totalRemaining(debts),
+    debtFreeOn: projection.debtFreeOn,
+    paidOffRatio: paidOffRatio(debts),
+    strategy: plan.strategy,
   };
 }
 
-const FABRICATED: Record<string, { projectedPayoffOn: Date; isFocus: boolean }> = {
-  "store-card": { projectedPayoffOn: new Date("2026-12-01"), isFocus: true },
-  "personal-loan": { projectedPayoffOn: new Date("2027-08-01"), isFocus: false },
-  "visa-4412": { projectedPayoffOn: new Date("2028-03-01"), isFocus: false },
-  "student-loan": { projectedPayoffOn: new Date("2028-11-01"), isFocus: false },
-  "auto-loan": { projectedPayoffOn: new Date("2029-08-01"), isFocus: false },
-};
-
 export async function getOverviewDebts(): Promise<OverviewDebtRow[]> {
-  const debts = await listDebts();
-  return debts.map((debt) => ({ debt, ...FABRICATED[debt.id] }));
+  const [debts, plan] = await Promise.all([listDebts(), getPlan()]);
+  const projection = projectPayoff(debts, plan);
+  return debts.map((debt) => ({
+    debt,
+    projectedPayoffOn: projection.perDebt[debt.id]?.payoffOn ?? null,
+    isFocus: debt.id === projection.focusDebtId,
+  }));
 }
 
 const PAYMENT_ROWS: PaymentRow[] = [

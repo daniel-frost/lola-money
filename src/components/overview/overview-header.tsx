@@ -29,7 +29,13 @@ export function OverviewHeader({
         <Stat label="Remaining" value={formatUSD(summary.remaining)} />
         <Stat
           label="Debt-free"
-          value={<Highlight>{formatMonthYear(summary.debtFreeOn)}</Highlight>}
+          value={
+            summary.debtFreeOn ? (
+              <Highlight>{formatMonthYear(summary.debtFreeOn)}</Highlight>
+            ) : (
+              "—"
+            )
+          }
         />
         <Stat label="Paid off" value={formatPercent(summary.paidOffRatio)} />
         <Stat label="Plan" value={STRATEGY_LABELS[summary.strategy]} />

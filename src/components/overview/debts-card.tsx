@@ -30,8 +30,12 @@ export function DebtsCard({ debts }: { debts: OverviewDebtRow[] }) {
             name={row.debt.name}
             detail={
               <span className="inline-flex items-center gap-2">
-                {formatAPR(row.debt.apr)} APR · paid off{" "}
-                {formatMonthYear(row.projectedPayoffOn, { long: true })}
+                {formatAPR(row.debt.apr)} APR
+                {row.projectedPayoffOn
+                  ? ` · paid off ${formatMonthYear(row.projectedPayoffOn, {
+                      long: true,
+                    })}`
+                  : " · not on track"}
                 {row.isFocus ? <StatusPill variant="focus" /> : null}
               </span>
             }
