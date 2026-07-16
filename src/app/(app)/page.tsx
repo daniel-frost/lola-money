@@ -1,13 +1,18 @@
+import { DebtsCard } from "@/components/overview/debts-card";
 import { OverviewHeader } from "@/components/overview/overview-header";
 import { Card } from "@/components/ui/card";
 import { CardHeader } from "@/components/ui/card-header";
-import { getOverviewHeaderStats } from "@/server/overview/overview.service";
+import {
+  getOverviewDebts,
+  getOverviewHeaderStats,
+} from "@/server/overview/overview.service";
 import { getCurrentUser } from "@/server/user/user.service";
 
 export default async function Overview() {
-  const [user, summary] = await Promise.all([
+  const [user, summary, debts] = await Promise.all([
     getCurrentUser(),
     getOverviewHeaderStats(),
+    getOverviewDebts(),
   ]);
 
   return (
@@ -19,9 +24,7 @@ export default async function Overview() {
           <Card className="min-h-48">
             <CardHeader title="July payments" />
           </Card>
-          <Card className="min-h-48">
-            <CardHeader title="Debts" />
-          </Card>
+          <DebtsCard debts={debts} />
         </div>
 
         <div className="flex flex-col gap-6">

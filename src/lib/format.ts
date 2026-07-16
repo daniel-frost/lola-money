@@ -15,9 +15,20 @@ export function formatPercent(
   }).format(ratio);
 }
 
-export function formatMonthYear(date: Date): string {
+export function formatAPR(bps: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "percent",
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 2,
+  }).format(bps / 10000);
+}
+
+export function formatMonthYear(
+  date: Date,
+  options?: { long?: boolean },
+): string {
   return new Intl.DateTimeFormat("en-US", {
-    month: "short",
+    month: options?.long ? "long" : "short",
     year: "numeric",
     timeZone: "UTC",
   }).format(date);
