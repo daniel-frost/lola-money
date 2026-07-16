@@ -4,6 +4,7 @@ export function ValueRow({
   value,
   name,
   detail,
+  leading,
   trailing,
   divider,
   className,
@@ -12,6 +13,7 @@ export function ValueRow({
   value: React.ReactNode;
   name: React.ReactNode;
   detail?: React.ReactNode;
+  leading?: React.ReactNode;
   trailing?: React.ReactNode;
   divider?: boolean;
 } & React.ComponentProps<"div">) {
@@ -24,6 +26,7 @@ export function ValueRow({
       )}
       {...props}
     >
+      {leading ? <div className="shrink-0">{leading}</div> : null}
       <div className="min-w-0 flex-1">
         <div className="leading-tight text-ink">
           <span className="font-bold tabular-nums">{value}</span> {name}

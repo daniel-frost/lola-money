@@ -23,6 +23,15 @@ export function formatAPR(bps: number): string {
   }).format(bps / 10000);
 }
 
+export function formatWeekdayDate(date: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
 export function formatMonthYear(
   date: Date,
   options?: { long?: boolean },
