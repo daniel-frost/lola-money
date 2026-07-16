@@ -11,8 +11,9 @@ const tabs = [
   { label: "Schedule", href: "/schedule" },
 ];
 
-export function NavBar() {
+export function NavBar({ userName }: { userName: string }) {
   const pathname = usePathname();
+  const initial = userName.charAt(0).toUpperCase();
 
   return (
     <header className="border-b border-hairline-strong bg-card">
@@ -46,7 +47,7 @@ export function NavBar() {
         </div>
 
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-wash text-xs font-bold text-blue-text">
-          MK
+          {initial}
         </div>
       </div>
     </header>
