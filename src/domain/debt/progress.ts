@@ -10,6 +10,12 @@ export function totalRemaining(debts: Debt[]): number {
     .reduce((sum, debt) => sum + debt.currentBalance, 0);
 }
 
+export function totalPaidOff(debts: Debt[]): number {
+  return debts
+    .filter(isCounted)
+    .reduce((sum, debt) => sum + (debt.highestBalance - debt.currentBalance), 0);
+}
+
 export function paidOffRatio(debts: Debt[]): number {
   const counted = debts.filter(isCounted);
   const highest = counted.reduce((sum, debt) => sum + debt.highestBalance, 0);

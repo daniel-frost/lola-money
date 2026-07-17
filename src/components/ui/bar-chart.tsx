@@ -13,6 +13,7 @@ export type BarChartBar = {
   segments: BarSegment[];
   variant?: "solid" | "planned" | "placeholder";
   emphasized?: boolean;
+  valueLabel?: string;
 };
 
 const LIFT = 60;
@@ -58,9 +59,11 @@ function smoothPath(points: Point[]): string {
 export function BarChart({
   bars,
   height = 180,
+  trend = true,
 }: {
   bars: BarChartBar[];
   height?: number;
+  trend?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
@@ -76,7 +79,9 @@ export function BarChart({
   }, []);
 
   const max = Math.max(1, ...bars.map(barTotal));
-  const chartHeight = height + LIFT;
+  const hasValueLabels = bars.some((bar) => bar.valueLabel);
+  const lift = trend ? LIFT : hasValueLabels ? 24 : 0;
+  const chartHeight = height + lift;
 
   const points = bars
     .map((bar, index) =>
@@ -89,7 +94,7 @@ export function BarChart({
     )
     .filter((point): point is Point => point !== null);
 
-  const showTrend = width > 0 && points.length > 1;
+  const showTrend = trend && width > 0 && points.length > 1;
   const last = points[points.length - 1];
 
   return (
@@ -156,6 +161,21 @@ export function BarChart({
             </div>
           </div>
         ))}
+
+        {bars.map((bar, index) =>
+          bar.valueLabel ? (
+            <span
+              key={`value-${index}`}
+              className="absolute -translate-x-1/2 -translate-y-full text-xs font-bold tabular-nums text-blue-text"
+              style={{
+                left: `${((index + 0.5) / bars.length) * 100}%`,
+                top: lift + (height - (barTotal(bar) / max) * height) - 4,
+              }}
+            >
+              {bar.valueLabel}
+            </span>
+          ) : null,
+        )}
       </div>
 
       <div className="mt-2 flex">

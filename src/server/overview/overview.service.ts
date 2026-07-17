@@ -3,12 +3,13 @@ import type { OverviewDebtRow } from "@/domain/overview/debt-row";
 import type { OverviewHeaderStats } from "@/domain/overview/header-stats";
 import type { OverviewMonthlyPayments } from "@/domain/overview/monthly-payments";
 import type { OverviewPayments } from "@/domain/overview/payments";
+import type { OverviewProgress } from "@/domain/overview/progress";
 import type { PaymentRow } from "@/domain/payment/monthly-payments";
 import { summarizePayments } from "@/domain/payment/monthly-payments";
 import { summarizeMonthlyHistory } from "@/domain/payment/monthly-history";
-import { paidOffRatio, totalRemaining } from "@/domain/debt/progress";
+import { paidOffRatio, totalPaidOff, totalRemaining } from "@/domain/debt/progress";
 import { projectPayoff } from "@/domain/payoff/simulate";
-import { listDebts } from "@/server/debt/debt.service";
+import { getBalanceHistory, listDebts } from "@/server/debt/debt.service";
 import { getPayments } from "@/server/payment/payment.service";
 import { getPlan } from "@/server/plan/plan.service";
 
@@ -38,6 +39,14 @@ export async function getOverviewMonthlyPayments(): Promise<OverviewMonthlyPayme
   ]);
   return {
     months: summarizeMonthlyHistory(payments, debts, plan.monthlyExtra),
+  };
+}
+
+export async function getOverviewProgress(): Promise<OverviewProgress> {
+  const [history, debts] = await Promise.all([getBalanceHistory(), listDebts()]);
+  return {
+    history,
+    balanceReduced: totalPaidOff(debts),
   };
 }
 
