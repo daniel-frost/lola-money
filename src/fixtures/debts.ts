@@ -61,4 +61,16 @@ export const debts: Debt[] = [
     dueDayOfMonth: 22,
     nextPaymentDueOn: new Date("2026-07-22"),
   },
+  {
+    id: "old-card",
+    name: "Old card",
+    type: "credit_card",
+    status: "paid_off",
+    currentBalance: 0,
+    highestBalance: 150_000,
+    apr: 2200,
+    minimumPayment: 0,
+    dueDayOfMonth: 1,
+    nextPaymentDueOn: new Date("2026-05-15"),
+  },
 ];

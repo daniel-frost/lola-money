@@ -53,11 +53,13 @@ export async function getOverviewProgress(): Promise<OverviewProgress> {
 export async function getOverviewDebts(): Promise<OverviewDebtRow[]> {
   const [debts, plan] = await Promise.all([listDebts(), getPlan()]);
   const projection = projectPayoff(debts, plan);
-  return debts.map((debt) => ({
-    debt,
-    projectedPayoffOn: projection.perDebt[debt.id]?.payoffOn ?? null,
-    isFocus: debt.id === projection.focusDebtId,
-  }));
+  return debts
+    .filter((debt) => debt.status === "active")
+    .map((debt) => ({
+      debt,
+      projectedPayoffOn: projection.perDebt[debt.id]?.payoffOn ?? null,
+      isFocus: debt.id === projection.focusDebtId,
+    }));
 }
 
 const PAYMENT_ROWS: PaymentRow[] = [

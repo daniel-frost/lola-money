@@ -26,3 +26,15 @@ export function paidOffRatio(debts: Debt[]): number {
   );
   return Math.max(0, Math.min(1, paid / highest));
 }
+
+export function debtPaidOffRatio(debt: Debt): number {
+  if (debt.highestBalance <= 0) return 0;
+  const paid = debt.highestBalance - debt.currentBalance;
+  return Math.max(0, Math.min(1, paid / debt.highestBalance));
+}
+
+export function totalMinimum(debts: Debt[]): number {
+  return debts
+    .filter(isCounted)
+    .reduce((sum, debt) => sum + debt.minimumPayment, 0);
+}

@@ -35,7 +35,11 @@ export function projectPayoff(
   plan: PayoffPlanInput,
   asOf: Date = new Date(),
 ): PayoffProjection {
-  const order = attackOrder(debts, plan.strategy, plan.customOrder);
+  const order = attackOrder(
+    debts.filter((debt) => debt.status === "active"),
+    plan.strategy,
+    plan.customOrder,
+  );
   const start = startOfMonth(asOf);
   const totalBudget =
     plan.monthlyExtra +
