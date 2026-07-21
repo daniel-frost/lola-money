@@ -7,8 +7,9 @@ import { cn } from "@/lib/cn";
 import { formatAPR, formatPercent, formatUSD } from "@/lib/format";
 
 const th =
-  "border border-hairline px-3 py-2.5 text-xs font-medium uppercase tracking-label text-faint";
-const td = "border border-hairline px-3 py-2.5";
+  "border-b border-hairline px-3 py-2.5 text-xs font-medium uppercase tracking-label text-faint";
+const td = "border-b border-hairline px-3 py-2.5";
+const narrow = "px-1 text-center";
 
 export function DebtsTable({ table }: { table: DebtsTableData }) {
   const { groups, totals } = table;
@@ -22,12 +23,13 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr>
-            <th className={cn(th, "text-center")}>#</th>
+            <th className={cn(th, narrow)} />
             <th className={cn(th, "text-left")}>Debt</th>
             <th className={cn(th, "text-right")}>Balance ↓</th>
             <th className={cn(th, "text-right")}>APR</th>
             <th className={cn(th, "text-right")}>Min /mo</th>
             <th className={cn(th, "text-right")}>Paid off</th>
+            <th className={cn(th, narrow)} />
           </tr>
         </thead>
 
@@ -40,7 +42,7 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                   className="cursor-pointer select-none font-bold text-ink hover:bg-hairline/40"
                   onClick={() => toggle(group.label)}
                 >
-                  <td className={cn(td, "text-center text-faint")}>
+                  <td className={cn(td, narrow, "text-faint")}>
                     {isCollapsed ? "▸" : "▾"}
                   </td>
                   <td className={td}>
@@ -53,12 +55,16 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                   <td className={td} />
                   <td className={td} />
                   <td className={td} />
+                  <td className={cn(td, narrow)} />
                 </tr>
 
                 {!isCollapsed &&
                   group.rows.map((row) => (
-                    <tr key={row.debt.id}>
-                      <td className={td} />
+                    <tr
+                      key={row.debt.id}
+                      className="cursor-pointer hover:bg-hairline/40"
+                    >
+                      <td className={cn(td, narrow)} />
                       <td className={cn(td, "pl-8 text-ink")}>
                         {row.debt.name}
                       </td>
@@ -74,6 +80,15 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                       <td className={cn(td, "text-right tabular-nums text-ink")}>
                         {formatPercent(row.paidOffRatio)}
                       </td>
+                      <td className={cn(td, narrow)}>
+                        <button
+                          type="button"
+                          aria-label={`Edit ${row.debt.name}`}
+                          className="cursor-pointer leading-none text-faint hover:text-ink"
+                        >
+                          ⋯
+                        </button>
+                      </td>
                     </tr>
                   ))}
               </Fragment>
@@ -83,7 +98,7 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
 
         <tfoot>
           <tr className="border-t border-hairline-strong font-bold text-ink">
-            <td className="px-3 py-3" />
+            <td className="px-1 py-3" />
             <td className="px-3 py-3 text-xs uppercase tracking-label text-faint">
               Total
             </td>
@@ -97,6 +112,7 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
             <td className="px-3 py-3 text-right tabular-nums">
               {formatPercent(totals.paidOffRatio)}
             </td>
+            <td className="px-1 py-3" />
           </tr>
         </tfoot>
       </table>

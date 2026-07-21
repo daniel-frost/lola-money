@@ -11,7 +11,7 @@ export default async function AppLayout({
   return (
     <div className="flex min-h-full flex-col">
       <NavBar userName={user.name} />
-      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">
+      <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 py-8">
         {children}
       </main>
     </div>
