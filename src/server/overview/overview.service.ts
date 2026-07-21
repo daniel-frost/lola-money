@@ -97,5 +97,6 @@ export async function getOverviewPayments(): Promise<OverviewPayments> {
     daysLeft: 8,
     rows: PAYMENT_ROWS,
     summary: summarizePayments(PAYMENT_ROWS),
+    overall: { paid: 2_180_000, total: 6_411_800 },
   };
 }

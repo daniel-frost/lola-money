@@ -4,8 +4,8 @@ import type { PaymentRow as PaymentRowData } from "@/domain/payment/monthly-paym
 import { formatUSD, formatWeekdayDate } from "@/lib/format";
 
 const surface: Record<PaymentRowData["status"], string> = {
-  paid: "rounded-2xl bg-green-wash px-4",
-  next: "rounded-2xl bg-yellow-wash px-4",
+  paid: "rounded-card bg-green-wash px-4",
+  next: "rounded-card bg-yellow-wash px-4",
   upcoming: "px-4",
 };
 

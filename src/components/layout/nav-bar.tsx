@@ -20,7 +20,7 @@ export function NavBar({ userName }: { userName: string }) {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
         <div className="flex h-full items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
-            <span className="h-7 w-7 rounded-lg bg-blue-bold" />
+            <span className="h-7 w-7 rounded bg-blue-bold" />
             <span className="text-lg font-bold text-ink">Lola</span>
           </Link>
 

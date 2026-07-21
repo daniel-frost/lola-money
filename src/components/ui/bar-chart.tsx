@@ -146,7 +146,7 @@ export function BarChart({
                   <div
                     key={segmentIndex}
                     className={cn(
-                      "w-full rounded-[10px]",
+                      "w-full rounded-[5px]",
                       bar.variant !== "planned" && SOLID[segment.tone],
                     )}
                     style={{

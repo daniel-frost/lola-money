@@ -1,4 +1,3 @@
-import { Highlight } from "@/components/ui/highlight";
 import type { OverviewHeaderStats } from "@/domain/overview/header-stats";
 import { STRATEGY_LABELS } from "@/domain/payoff/strategy";
 import { formatPercent, formatUSD } from "@/lib/format";
@@ -22,7 +21,7 @@ export function OverviewHeader({
   return (
     <header className="flex items-start justify-between gap-6">
       <h1 className="font-display text-[32px] font-black leading-tight tracking-display text-ink">
-        Welcome back, <Highlight>{userName}!</Highlight>
+        Welcome back, {userName}!
       </h1>
 
       <dl className="flex items-start gap-8">

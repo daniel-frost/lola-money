@@ -7,4 +7,5 @@ export type OverviewPayments = {
   daysLeft: number;
   rows: PaymentRow[];
   summary: PaymentsSummary;
+  overall: { paid: number; total: number };
 };
