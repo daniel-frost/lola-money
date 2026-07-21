@@ -80,6 +80,38 @@ we deliberately kept out of the data model.
 - **Hairline** (`#F4F3F0`) is for **inner dividers and fills only**, never a card outline.
 - **No gradients, photography, or illustration.** The source specifies none. Motion, if any,
   stays to minimal opacity/transform fades.
+- **→ Data-dense / management surfaces don't use the card rules** — they use a **Ledger**
+  (below). It's the one place we *do* use borders and sharper corners.
+
+---
+
+## Ledger — data & management surfaces
+
+Not every screen is a narrative. **Where the job is scanning, comparing, and editing many
+rows of numbers, use a ledger — an actual table — not a card list.** The Debts page is the
+first: it's a worksheet you maintain. This is a deliberate *second* surface language, living
+alongside the warm card surfaces (the Overview); each is used for its job.
+
+A ledger **overrides three card rules on purpose** — it's a different tool:
+
+- **Columns under labels are the point.** "Numbers lead sentences / never label:value"
+  governs _narrative_ rows; a ledger's whole value _is_ aligned columns beneath header labels.
+- **Gridlines are allowed** — hairline (`border-hairline`) cell borders draw the grid. This is
+  the one surface where borders do the work instead of the shadow.
+- **Sharper corners** — ledgers read as tools, so they favor tighter corners than `rounded-card`.
+
+**Anatomy:**
+
+- **Headers** — faint uppercase `tracking-label text-faint`; left-aligned for text, right for numbers.
+- **Numeric columns right-aligned + `tabular-nums`** so figures line up down the column — the
+  whole reason to use a table.
+- **Status via a row wash, not stripes** — paid-off = `green-wash`, focus (rank 1) =
+  `yellow-wash`. **No zebra striping**; the washes carry meaning, alternating fills are noise.
+- **Totals footer** — a summed row set off by a single rule, `text-ink` bold.
+- **Glyphs unchanged** — `✓` (green) marks a paid-off row's rank cell; same `✓`/`✦`/`›` set.
+
+Color semantics, cents, and coral-means-behind are all unchanged — only the _layout_
+language differs.
 
 ---
 

@@ -7,7 +7,7 @@ const variants = {
 } as const;
 
 const sizes = {
-  md: "px-6 py-3 text-base",
+  md: "px-4 py-2.5 text-base",
   sm: "px-4 py-[7px] text-sm",
 } as const;
 

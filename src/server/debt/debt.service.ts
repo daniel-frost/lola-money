@@ -2,7 +2,8 @@ import type { Debt } from "@/domain/debt/debt";
 import type { BalanceHistoryPoint } from "@/domain/debt/balance-history";
 import { debts } from "@/fixtures/debts";
 import { balanceHistory } from "@/fixtures/balance-history";
-import type { DebtsTable } from "@/domain/debt/debt-table";
+import type { DebtsTable, DebtTableRow } from "@/domain/debt/debt-table";
+import { groupDebtRows } from "@/domain/debt/debt-table";
 import {
   debtPaidOffRatio,
   paidOffRatio,
@@ -24,12 +25,13 @@ const PAID_OFF_ON: Record<string, Date> = {
 
 export async function getDebtsTable(): Promise<DebtsTable> {
   const all = await listDebts();
+  const rows: DebtTableRow[] = all.map((debt) => ({
+    debt,
+    paidOffRatio: debtPaidOffRatio(debt),
+    paidOffOn: PAID_OFF_ON[debt.id] ?? null,
+  }));
   return {
-    rows: all.map((debt) => ({
-      debt,
-      paidOffRatio: debtPaidOffRatio(debt),
-      paidOffOn: PAID_OFF_ON[debt.id] ?? null,
-    })),
+    groups: groupDebtRows(rows),
     totals: {
       balance: totalRemaining(all),
       minimum: totalMinimum(all),
