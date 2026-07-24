@@ -1,3 +1,4 @@
+import { DebtsGroupBy } from "@/components/debts/debts-group-by";
 import { DebtsTable } from "@/components/debts/debts-table";
 import { Button } from "@/components/ui/button";
 import { getDebtsTable } from "@/server/debt/debt.service";
@@ -12,7 +13,8 @@ export default async function DebtsPage() {
       </h1>
 
       <div className="flex flex-col gap-3">
-        <div className="flex justify-end">
+        <div className="flex items-center justify-end gap-3">
+          <DebtsGroupBy />
           <Button>+ Add debt</Button>
         </div>
         <DebtsTable table={table} />

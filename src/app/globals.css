@@ -5,6 +5,7 @@
   --card: #ffffff; /* card surface */
   --hairline: #f2ede1; /* inner dividers / fills */
   --hairline-strong: #e7e1d2; /* ghost-button border */
+  --sand: #f4eee0; /* warm neutral fill — chips, controls */
   --text-faint: #a3a19a; /* faint text, section labels */
   --text-secondary: #83817a; /* secondary text */
   --ink: #16150f; /* primary text */
@@ -58,6 +59,7 @@
   --color-card: var(--card);
   --color-hairline: var(--hairline);
   --color-hairline-strong: var(--hairline-strong);
+  --color-sand: var(--sand);
   --color-faint: var(--text-faint); /* text-faint */
   --color-muted: var(--text-secondary); /* text-muted */
   --color-ink: var(--ink); /* text-ink */
