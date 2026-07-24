@@ -17,7 +17,7 @@ export function NavBar({ userName }: { userName: string }) {
 
   return (
     <header className="border-b border-hairline-strong bg-card">
-      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-6">
+      <div className="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-6 min-[1800px]:max-w-[1440px]">
         <div className="flex h-full items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
             <span className="h-7 w-7 rounded bg-blue-bold" />

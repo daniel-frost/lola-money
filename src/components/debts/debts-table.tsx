@@ -2,14 +2,40 @@
 
 import { Fragment, useState } from "react";
 import { Card } from "@/components/ui/card";
+import type { DebtStatus } from "@/domain/debt/debt";
 import type { DebtsTable as DebtsTableData } from "@/domain/debt/debt-table";
 import { cn } from "@/lib/cn";
 import { formatAPR, formatPercent, formatUSD } from "@/lib/format";
 
 const th =
-  "border-b border-hairline px-3 py-2.5 text-xs font-medium uppercase tracking-label text-faint";
-const td = "border-b border-hairline px-3 py-2.5";
+  "border border-hairline px-3 py-2.5 text-xs font-medium uppercase tracking-label text-faint";
+const td = "border border-hairline px-3 py-2.5";
 const narrow = "px-1 text-center";
+
+const statusStyle: Record<DebtStatus, string> = {
+  active: "bg-hairline text-muted",
+  paid_off: "bg-green-wash text-green-bold",
+  archived: "bg-hairline text-faint",
+};
+
+const statusLabel: Record<DebtStatus, string> = {
+  active: "active",
+  paid_off: "paid off",
+  archived: "archived",
+};
+
+function StatusPill({ status }: { status: DebtStatus }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-pill-status px-2.5 py-1 text-xs font-bold leading-none",
+        statusStyle[status],
+      )}
+    >
+      {statusLabel[status]}
+    </span>
+  );
+}
 
 export function DebtsTable({ table }: { table: DebtsTableData }) {
   const { groups, totals } = table;
@@ -29,6 +55,7 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
             <th className={cn(th, "text-right")}>APR</th>
             <th className={cn(th, "text-right")}>Min /mo</th>
             <th className={cn(th, "text-right")}>Paid off</th>
+            <th className={cn(th, "text-left")}>Status</th>
             <th className={cn(th, narrow)} />
           </tr>
         </thead>
@@ -51,6 +78,7 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                       ({group.count})
                     </span>
                   </td>
+                  <td className={td} />
                   <td className={td} />
                   <td className={td} />
                   <td className={td} />
@@ -79,6 +107,9 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                       </td>
                       <td className={cn(td, "text-right tabular-nums text-ink")}>
                         {formatPercent(row.paidOffRatio)}
+                      </td>
+                      <td className={td}>
+                        <StatusPill status={row.debt.status} />
                       </td>
                       <td className={cn(td, narrow)}>
                         <button
@@ -112,6 +143,7 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
             <td className="px-3 py-3 text-right tabular-nums">
               {formatPercent(totals.paidOffRatio)}
             </td>
+            <td className="px-3 py-3" />
             <td className="px-1 py-3" />
           </tr>
         </tfoot>

@@ -6,15 +6,17 @@ export default async function DebtsPage() {
   const table = await getDebtsTable();
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <h1 className="font-display text-[32px] font-black tracking-display text-ink">
-          Debts
-        </h1>
-        <Button>+ Add debt</Button>
-      </div>
+    <div className="flex flex-col gap-8">
+      <h1 className="font-display text-[32px] font-black tracking-display text-ink">
+        Debts
+      </h1>
 
-      <DebtsTable table={table} />
+      <div className="flex flex-col gap-3">
+        <div className="flex justify-end">
+          <Button>+ Add debt</Button>
+        </div>
+        <DebtsTable table={table} />
+      </div>
     </div>
   );
 }
