@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
 import { formatAPR, formatPercent, formatUSD } from "@/lib/format";
 
 const th =
-  "border border-hairline px-3 py-2.5 text-xs font-medium uppercase tracking-label text-faint";
+  "border border-hairline px-3 py-2.5 text-xs font-bold uppercase tracking-label text-faint";
 const td = "border border-hairline px-3 py-2.5";
 const narrow = "px-1 text-center";
 

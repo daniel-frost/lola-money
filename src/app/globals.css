@@ -15,6 +15,7 @@
   --blue-text: #1272bd; /* action */
   --yellow-wash: #fcf0af;
   --yellow-bold: #d48f00; /* focus */
+  --now: #fef9df; /* opaque 'now' row — equals yellow-wash/40 over white */
   --green-wash: #d8f3df;
   --green-bold: #1f9d4d; /* paid */
   --coral-wash: #fddfd5;
@@ -69,6 +70,7 @@
   --color-blue-text: var(--blue-text);
   --color-yellow-wash: var(--yellow-wash);
   --color-yellow-bold: var(--yellow-bold);
+  --color-now: var(--now);
   --color-green-wash: var(--green-wash);
   --color-green-bold: var(--green-bold);
   --color-coral-wash: var(--coral-wash);
