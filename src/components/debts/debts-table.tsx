@@ -3,6 +3,7 @@
 import { MoreHorizontal } from "lucide-react";
 import { Fragment, useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Caret } from "@/components/ui/caret";
 import type { DebtStatus } from "@/domain/debt/debt";
 import type { DebtsTable as DebtsTableData } from "@/domain/debt/debt-table";
 import { cn } from "@/lib/cn";
@@ -35,22 +36,6 @@ function StatusPill({ status }: { status: DebtStatus }) {
     >
       {statusLabel[status]}
     </span>
-  );
-}
-
-function GroupCaret({ collapsed }: { collapsed: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 10 10"
-      aria-hidden="true"
-      fill="currentColor"
-      className={cn(
-        "h-2.5 w-2.5 shrink-0 text-faint transition-transform",
-        collapsed && "-rotate-90",
-      )}
-    >
-      <path d="M1 3h8L5 7z" />
-    </svg>
   );
 }
 
@@ -87,7 +72,9 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                 >
                   <td className={td}>
                     <span className="flex items-center gap-2">
-                      <GroupCaret collapsed={isCollapsed} />
+                      <Caret
+                        className={cn("text-faint", isCollapsed && "-rotate-90")}
+                      />
                       <span>
                         {group.label}
                         <span className="pl-1 font-normal text-faint">
