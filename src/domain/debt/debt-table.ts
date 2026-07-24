@@ -19,6 +19,7 @@ export type DebtsTable = {
   totals: {
     balance: number;
     minimum: number;
+    avgApr: number;
     paidOffRatio: number;
   };
 };

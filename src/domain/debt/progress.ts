@@ -38,3 +38,14 @@ export function totalMinimum(debts: Debt[]): number {
     .filter(isCounted)
     .reduce((sum, debt) => sum + debt.minimumPayment, 0);
 }
+
+export function weightedApr(debts: Debt[]): number {
+  const counted = debts.filter(isCounted);
+  const balance = counted.reduce((sum, debt) => sum + debt.currentBalance, 0);
+  if (balance <= 0) return 0;
+  const weighted = counted.reduce(
+    (sum, debt) => sum + debt.currentBalance * debt.apr,
+    0,
+  );
+  return Math.round(weighted / balance);
+}

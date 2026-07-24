@@ -9,6 +9,7 @@ import {
   paidOffRatio,
   totalMinimum,
   totalRemaining,
+  weightedApr,
 } from "@/domain/debt/progress";
 
 export async function listDebts(): Promise<Debt[]> {
@@ -35,6 +36,7 @@ export async function getDebtsTable(): Promise<DebtsTable> {
     totals: {
       balance: totalRemaining(all),
       minimum: totalMinimum(all),
+      avgApr: weightedApr(all),
       paidOffRatio: paidOffRatio(all),
     },
   };
