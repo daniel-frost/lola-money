@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
@@ -42,14 +43,17 @@ export function Select({
         </span>
         <span className="flex items-center gap-1.5 bg-sand px-2.5 py-2.5 text-muted transition-colors group-hover:bg-blue-wash group-hover:text-blue-text">
           {selected?.label ?? value}
-          <span className="text-xs text-faint transition-colors group-hover:text-blue-text">
-            {open ? "⌄" : "›"}
-          </span>
+          <ChevronRight
+            className={cn(
+              "h-4 w-4 text-faint transition-transform group-hover:text-blue-text",
+              open && "rotate-90",
+            )}
+          />
         </span>
       </button>
 
       {open ? (
-        <div className="absolute right-0 z-20 mt-1 min-w-[200px] overflow-hidden rounded-card bg-card py-1 shadow-card">
+        <div className="absolute right-0 z-20 mt-1 min-w-full overflow-hidden rounded-card bg-card py-1 shadow-card">
           {options.map((option) => {
             const isSelected = option.value === value;
             return (
@@ -68,7 +72,7 @@ export function Select({
                 )}
               >
                 {option.label}
-                {isSelected ? <span className="text-blue-text">✓</span> : null}
+                {isSelected ? <Check className="h-4 w-4 text-blue-text" /> : null}
               </button>
             );
           })}

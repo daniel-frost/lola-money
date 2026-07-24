@@ -1,5 +1,6 @@
 "use client";
 
+import { MoreHorizontal } from "lucide-react";
 import { Fragment, useState } from "react";
 import { Card } from "@/components/ui/card";
 import type { DebtStatus } from "@/domain/debt/debt";
@@ -37,6 +38,22 @@ function StatusPill({ status }: { status: DebtStatus }) {
   );
 }
 
+function GroupCaret({ collapsed }: { collapsed: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 10 10"
+      aria-hidden="true"
+      fill="currentColor"
+      className={cn(
+        "h-2.5 w-2.5 shrink-0 text-faint transition-transform",
+        collapsed && "-rotate-90",
+      )}
+    >
+      <path d="M1 3h8L5 7z" />
+    </svg>
+  );
+}
+
 export function DebtsTable({ table }: { table: DebtsTableData }) {
   const { groups, totals } = table;
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
@@ -49,7 +66,6 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr>
-            <th className={cn(th, narrow)} />
             <th className={cn(th, "text-left")}>Debt</th>
             <th className={cn(th, "text-right")}>Balance ↓</th>
             <th className={cn(th, "text-right")}>APR</th>
@@ -69,13 +85,15 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                   className="cursor-pointer select-none font-bold text-ink hover:bg-hairline/40"
                   onClick={() => toggle(group.label)}
                 >
-                  <td className={cn(td, narrow, "text-faint")}>
-                    {isCollapsed ? "▸" : "▾"}
-                  </td>
                   <td className={td}>
-                    {group.label}
-                    <span className="pl-1 font-normal text-faint">
-                      ({group.count})
+                    <span className="flex items-center gap-2">
+                      <GroupCaret collapsed={isCollapsed} />
+                      <span>
+                        {group.label}
+                        <span className="pl-1 font-normal text-faint">
+                          ({group.count})
+                        </span>
+                      </span>
                     </span>
                   </td>
                   <td className={td} />
@@ -92,8 +110,7 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                       key={row.debt.id}
                       className="cursor-pointer hover:bg-hairline/40"
                     >
-                      <td className={cn(td, narrow)} />
-                      <td className={cn(td, "pl-8 text-ink")}>
+                      <td className={cn(td, "pl-[30px] text-ink")}>
                         {row.debt.name}
                       </td>
                       <td className={cn(td, "text-right tabular-nums text-ink")}>
@@ -115,9 +132,9 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
                         <button
                           type="button"
                           aria-label={`Edit ${row.debt.name}`}
-                          className="cursor-pointer leading-none text-faint hover:text-ink"
+                          className="inline-flex cursor-pointer items-center justify-center text-faint hover:text-ink"
                         >
-                          ⋯
+                          <MoreHorizontal className="h-4 w-4" />
                         </button>
                       </td>
                     </tr>
@@ -129,7 +146,6 @@ export function DebtsTable({ table }: { table: DebtsTableData }) {
 
         <tfoot>
           <tr className="border-t border-hairline-strong font-bold text-ink">
-            <td className="px-1 py-3" />
             <td className="px-3 py-3 text-xs uppercase tracking-label text-faint">
               Total
             </td>

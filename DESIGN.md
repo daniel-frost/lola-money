@@ -136,9 +136,13 @@ as a pixel-accurate blueprint.
 
 ## Iconography
 
-No icon set was provided. The system uses **unicode glyphs as icons**: `✦` (AI/Lola), `✓`
-(paid), `›` (chevron/navigation). **Do not** add an icon font or SVG icon set without new
-source material, and **do not** use emoji.
+**Functional icons come from `lucide-react`** — chevrons, carets, the `⋯` menu, sync, edit,
+check. Stroke-based, inherit `currentColor`, sized on the 16px grid (`h-4 w-4` in the ledger)
+so they never shift layout the way variable-width glyphs did. It is the **one** icon library:
+don't add another, and **don't** use emoji.
+
+**`✦` stays a hand-set brand glyph** — the Lola / AI mark, rendered as text, never from the
+library. It's identity, not iconography.
 
 ---
 
