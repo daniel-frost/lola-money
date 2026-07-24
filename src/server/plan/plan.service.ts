@@ -1,6 +1,6 @@
 import type { PayoffPlanInput } from "@/domain/payoff/simulate";
-import { plan } from "@/fixtures/plan";
+import { findPlan } from "@/server/plan/plan.repository";
 
 export async function getPlan(): Promise<PayoffPlanInput> {
-  return plan;
+  return findPlan();
 }

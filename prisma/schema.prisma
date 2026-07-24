@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String  @id @default(cuid())
+  name  String
+  email String? @unique
+
+  debts Debt[]
+  plan  PayoffPlan?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Debt {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name   String
+  type   String
+  status String @default("active")
+
+  currentBalance Int
+  highestBalance Int
+  apr            Int
+  minimumPayment Int
+
+  dueDayOfMonth    Int
+  nextPaymentDueOn DateTime
+  paidOffOn        DateTime?
+
+  payments Payment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Payment {
+  id     String @id @default(cuid())
+  debtId String
+  debt   Debt   @relation(fields: [debtId], references: [id], onDelete: Cascade)
+
+  amount Int
+  date   DateTime
+  type   String
+  note   String?
+
+  createdAt DateTime @default(now())
+
+  @@index([debtId])
+}
+
+model PayoffPlan {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  strategy     String   @default("snowball")
+  monthlyExtra Int      @default(0)
+  customOrder  String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

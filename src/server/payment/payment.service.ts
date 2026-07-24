@@ -1,6 +1,6 @@
 import type { Payment } from "@/domain/payment/payment";
-import { payments } from "@/fixtures/payments";
+import { findPayments } from "@/server/payment/payment.repository";
 
 export async function getPayments(): Promise<Payment[]> {
-  return payments;
+  return findPayments();
 }

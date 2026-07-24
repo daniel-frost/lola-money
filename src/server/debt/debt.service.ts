@@ -1,7 +1,7 @@
 import type { Debt } from "@/domain/debt/debt";
 import type { BalanceHistoryPoint } from "@/domain/debt/balance-history";
-import { debts } from "@/fixtures/debts";
 import { balanceHistory } from "@/fixtures/balance-history";
+import { findDebts } from "@/server/debt/debt.repository";
 import type { DebtsTable, DebtTableRow } from "@/domain/debt/debt-table";
 import { groupDebtRows } from "@/domain/debt/debt-table";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@/domain/debt/progress";
 
 export async function listDebts(): Promise<Debt[]> {
-  return debts;
+  return findDebts();
 }
 
 export async function getBalanceHistory(): Promise<BalanceHistoryPoint[]> {
