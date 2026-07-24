@@ -29,7 +29,7 @@ function Trailing({ row }: { row: PaymentRowData }) {
     return <span className="font-bold text-green-bold">Paid</span>;
   }
   return (
-    <Button variant={row.status === "next" ? "primary" : "ghost"} size="sm">
+    <Button variant={row.status === "next" ? "primary" : "secondary"} size="sm">
       Mark paid
     </Button>
   );

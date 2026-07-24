@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 
 const variants = {
   primary: "bg-blue-bold text-white hover:bg-blue-text",
-  ghost: "border border-hairline-strong text-ink hover:bg-hairline",
+  secondary: "bg-sand text-ink hover:bg-blue-wash hover:text-blue-text",
   ink: "bg-ink text-white",
 } as const;
 
